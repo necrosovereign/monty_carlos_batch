@@ -17,4 +17,12 @@
 #![deny(clippy::pedantic)]
 #![deny(missing_docs)]
 
-fn main() {}
+mod input;
+
+use input::{Input, InputBatch, SimulationType};
+
+fn main() {
+    let input: InputBatch =
+        toml::from_str(&std::fs::read_to_string("example.toml").unwrap()).unwrap();
+    println!("{input:?}");
+}

@@ -1,0 +1,13 @@
+[[simulation]]
+iterations = 1000
+simulation_type = { test_statistic = 0.45 }
+
+[[simulation]]
+simulation_type = { test_statistic = 0.45 }
+
+[[simulation]]
+iterations = 1000
+simulation_type = "make_distribution"
+
+[[simulation]]
+simulation_type = "make_distribution"
