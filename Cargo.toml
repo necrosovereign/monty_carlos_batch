@@ -7,5 +7,7 @@ edition = "2021"
 
 [dependencies]
 monty_carlos = { git = "https://github.com/necrosovereign/monty_carlos", version = "0.2.1" }
+rand = "0.8.5"
 serde = { version = "1.0.197", features = ["derive"] }
+statrs = "0.16.0"
 toml = "0.8.12"

@@ -26,9 +26,9 @@ fn main() {
     input_batch.push(Input {
         iterations: Some(1000),
         simulation_type: SimulationType::TestStatistic(0.45),
-        simulation: input::Simulation::KSTest {
+        simulation: input::simulation::Simulation::KSTest {
             samples: 259,
-            distribution: input::Distribution::Normal {
+            distribution: input::simulation::Distribution::Normal {
                 mean: 0.0,
                 stdev: 1.0,
             },

@@ -110,7 +110,9 @@ name = "monty_carlos_batch"
 version = "0.1.0"
 dependencies = [
  "monty_carlos",
+ "rand",
  "serde",
+ "statrs",
  "toml",
 ]
 
