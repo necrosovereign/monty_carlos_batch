@@ -1,6 +1,7 @@
 //! Contains the structs describing the input file
 //!
 
+use monty_carlos::MonteCarlo;
 use serde::{Deserialize, Serialize};
 
 /// Description of one simulation
@@ -9,6 +10,26 @@ pub(crate) struct Input {
     pub iterations: Option<usize>,
     pub simulation_type: SimulationType,
     pub simulation: simulation::Simulation,
+}
+
+impl Input {
+    pub(crate) fn run_simulation(&self) {
+        let sample = self.simulation.generate_sample();
+        let mut monte_carlo = MonteCarlo::new(sample);
+        if let Some(iterations) = self.iterations {
+            monte_carlo.iterations = iterations;
+        }
+        match self.simulation_type {
+            SimulationType::TestStatistic(test_statistic) => {
+                let pvalue = monte_carlo.simulate_pvalue(test_statistic);
+                println!("{pvalue}");
+            }
+            SimulationType::MakeDistribution => {
+                let distribution = monte_carlo.simulate_distribution();
+                println!("{distribution:?}");
+            }
+        }
+    }
 }
 
 /// An enum, whose variants correspond to the methods of the [`monty_carlos::MonteCarlo`] struct.
@@ -25,7 +46,7 @@ pub mod simulation;
 #[derive(Debug, Deserialize, Serialize, PartialEq)]
 pub(crate) struct InputBatch {
     #[serde(rename = "simulations")]
-    batch: Vec<Input>,
+    pub batch: Vec<Input>,
 }
 
 impl InputBatch {

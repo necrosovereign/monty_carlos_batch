@@ -19,27 +19,15 @@
 
 mod input;
 
-use input::{Input, InputBatch, SimulationType};
+use input::InputBatch;
 
 fn main() {
-    let mut input_batch = InputBatch::new();
-    input_batch.push(Input {
-        iterations: Some(1000),
-        simulation_type: SimulationType::TestStatistic(0.45),
-        simulation: input::simulation::Simulation::KSTest {
-            samples: 259,
-            distribution: input::simulation::Distribution::Normal {
-                mean: 0.0,
-                stdev: 1.0,
-            },
-        },
-    });
-    std::fs::write("test.toml", toml::to_string(&input_batch).unwrap()).unwrap();
-
-    let input: InputBatch = match toml::from_str(&std::fs::read_to_string("example.toml").unwrap())
-    {
-        Ok(input) => input,
-        Err(err) => panic!("{}", err.message()),
-    };
-    println!("{input:?}");
+    let input_batch: InputBatch =
+        match toml::from_str(&std::fs::read_to_string("example.toml").unwrap()) {
+            Ok(input) => input,
+            Err(err) => panic!("{}", err.message()),
+        };
+    for input in input_batch.batch {
+        input.run_simulation();
+    }
 }

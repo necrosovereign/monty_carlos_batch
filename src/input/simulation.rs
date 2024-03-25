@@ -21,7 +21,7 @@ pub(crate) enum Simulation {
 }
 
 impl Simulation {
-    fn generate_sample(&self) -> Box<dyn Sample> {
+    pub(crate) fn generate_sample(&self) -> Box<dyn Sample> {
         match self {
             Simulation::KSTest {
                 samples,
