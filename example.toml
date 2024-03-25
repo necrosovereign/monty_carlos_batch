@@ -1,13 +1,27 @@
-[[simulation]]
+[[simulations]]
 iterations = 1000
 simulation_type = { test_statistic = 0.45 }
+[simulations.simulation.Kolmogorov_Smirnov_test]
+samples = 259
+distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
 
-[[simulation]]
+[[simulations]]
 simulation_type = { test_statistic = 0.45 }
+[simulations.simulation.Kolmogorov_Smirnov_test]
+samples = 259
+distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
 
-[[simulation]]
+[[simulations]]
 iterations = 1000
 simulation_type = "make_distribution"
+[simulations.simulation.Kolmogorov_Smirnov_test]
+samples = 259
+distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
 
-[[simulation]]
+[[simulations]]
 simulation_type = "make_distribution"
+[simulations.simulation.Lilliefors_test]
+samples = 259
+generating_distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
+distribution_to_compare = "Normal"
+

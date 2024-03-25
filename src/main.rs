@@ -22,7 +22,24 @@ mod input;
 use input::{Input, InputBatch, SimulationType};
 
 fn main() {
-    let input: InputBatch =
-        toml::from_str(&std::fs::read_to_string("example.toml").unwrap()).unwrap();
+    let mut input_batch = InputBatch::new();
+    input_batch.push(Input {
+        iterations: Some(1000),
+        simulation_type: SimulationType::TestStatistic(0.45),
+        simulation: input::Simulation::KSTest {
+            samples: 259,
+            distribution: input::Distribution::Normal {
+                mean: 0.0,
+                stdev: 1.0,
+            },
+        },
+    });
+    std::fs::write("test.toml", toml::to_string(&input_batch).unwrap()).unwrap();
+
+    let input: InputBatch = match toml::from_str(&std::fs::read_to_string("example.toml").unwrap())
+    {
+        Ok(input) => input,
+        Err(err) => panic!("{}", err.message()),
+    };
     println!("{input:?}");
 }
