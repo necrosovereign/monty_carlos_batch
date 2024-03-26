@@ -49,14 +49,14 @@ pub(crate) struct InputBatch {
     pub batch: Vec<Input>,
 }
 
-impl InputBatch {
-    /// Creates empty [`InputBatch`].
-    pub fn new() -> Self {
-        Self { batch: Vec::new() }
-    }
+// impl InputBatch {
+//     /// Creates empty [`InputBatch`].
+//     pub fn new() -> Self {
+//         Self { batch: Vec::new() }
+//     }
 
-    /// Adds `input` to `self`
-    pub fn push(&mut self, input: Input) {
-        self.batch.push(input);
-    }
-}
+//     /// Adds `input` to `self`
+//     pub fn push(&mut self, input: Input) {
+//         self.batch.push(input);
+//     }
+// }
