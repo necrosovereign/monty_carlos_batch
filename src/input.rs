@@ -22,11 +22,11 @@ impl Input {
         match self.simulation_type {
             SimulationType::TestStatistic(test_statistic) => {
                 let pvalue = monte_carlo.simulate_pvalue(test_statistic);
-                println!("{pvalue}");
+                println!("probability = {pvalue}");
             }
             SimulationType::MakeDistribution => {
-                let distribution = monte_carlo.simulate_distribution();
-                println!("{distribution:?}");
+                let distribution = monte_carlo.simulate_distribution().unwrap();
+                println!("percentiles = {distribution:?}");
             }
         }
     }
