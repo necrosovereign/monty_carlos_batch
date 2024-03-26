@@ -28,6 +28,10 @@ impl Input {
                 let distribution = monte_carlo.simulate_distribution().unwrap();
                 println!("percentiles = {distribution:?}");
             }
+            SimulationType::Probability(alpha) => {
+                let statistic = monte_carlo.simulate_statistic(alpha);
+                println!("statistic = {statistic}");
+            }
         }
     }
 }
@@ -38,6 +42,7 @@ impl Input {
 pub(crate) enum SimulationType {
     TestStatistic(f64),
     MakeDistribution,
+    Probability(f64),
 }
 
 pub mod simulation;
