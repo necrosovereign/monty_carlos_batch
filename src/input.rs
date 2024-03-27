@@ -32,6 +32,11 @@ impl Input {
                 let statistic = monte_carlo.simulate_statistic(alpha);
                 println!("statistic = {statistic}");
             }
+            SimulationType::MeanAndStdev => {
+                let (mean, stdev) = monte_carlo.simulate_mean_stdev();
+                println!("mean = {mean}");
+                println!("stdev = {stdev}");
+            }
         }
     }
 }
@@ -43,6 +48,7 @@ pub(crate) enum SimulationType {
     TestStatistic(f64),
     MakeDistribution,
     Probability(f64),
+    MeanAndStdev,
 }
 
 pub mod simulation;
