@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-monty_carlos = { git = "https://github.com/necrosovereign/monty_carlos", version = "0.2.2" }
+monty_carlos = { git = "https://github.com/necrosovereign/monty_carlos", version = "0.2.3" }
 rand = "0.8.5"
 serde = { version = "1.0.197", features = ["derive"] }
 statrs = "0.16.0"
