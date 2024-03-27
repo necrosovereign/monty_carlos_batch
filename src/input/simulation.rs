@@ -4,6 +4,8 @@ use monty_carlos::sample::{
 };
 use serde::{Deserialize, Serialize};
 
+use crate::snowfall::Snowfall;
+
 /// An enum that describes possible simulation that can be executed
 #[derive(PartialEq, Debug, Deserialize, Serialize)]
 pub(crate) enum Simulation {
@@ -17,6 +19,11 @@ pub(crate) enum Simulation {
         samples: usize,
         generating_distribution: DistrDescription,
         distribution_to_compare: Fit,
+    },
+    Snowfall {
+        average_snowfall_number: f64,
+        average_log_snow_amount: f64,
+        stdev_log_snow_amount: f64,
     },
 }
 
@@ -39,6 +46,15 @@ impl Simulation {
                 )
                 .unwrap(),
             ),
+            Simulation::Snowfall {
+                average_snowfall_number,
+                average_log_snow_amount,
+                stdev_log_snow_amount,
+            } => BatchSample::Snowfall(Snowfall::new(
+                *average_snowfall_number,
+                *average_log_snow_amount,
+                *stdev_log_snow_amount,
+            )),
         }
     }
 }
@@ -46,6 +62,7 @@ impl Simulation {
 pub(crate) enum BatchSample {
     KS(KSSample<BatchDistribution>),
     Lilliefors(LillieforsSample<BatchDistribution, Fit>),
+    Snowfall(Snowfall),
 }
 
 macro_rules! impl_sample_for_batch_sample {
@@ -67,7 +84,7 @@ macro_rules! impl_sample_for_batch_sample {
     };
 }
 
-impl_sample_for_batch_sample!(KS, Lilliefors);
+impl_sample_for_batch_sample!(KS, Lilliefors, Snowfall);
 
 /// An enum of descriptions possible distributions for Kolmogorov-Smirnov and Lilliefors tests
 #[derive(Copy, Clone, PartialEq, Debug, Deserialize, Serialize)]
