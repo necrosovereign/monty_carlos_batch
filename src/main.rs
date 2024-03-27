@@ -18,6 +18,7 @@
 #![deny(missing_docs)]
 
 mod input;
+mod snowfall;
 
 use input::InputBatch;
 
