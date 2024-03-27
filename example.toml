@@ -1,27 +1,43 @@
+# Each [[simulations]] starts a new command to run a simulation
 [[simulations]]
-iterations = 1000
-simulation_type = { test_statistic = 0.45 }
+iterations = 1000 # How many iterations of simulation will run
+simulation_type = { test_statistic = 0.45 } # Calculates how probable for the statistic value to be less than 0.45
+
+# Simulate Kolmogorov-Smirnov test.
+# At each iteration generates a list of samples from the distribution
+# The statistic value is the d_max value between the distribution
+# and the step distribution of the generated values.
+[simulations.simulation.Kolmogorov_Smirnov_test]
+samples = 259 # number of values in the generated list
+distribution = {type = "Normal", mean = 0.0, stdev = 1.0} # Generate values from a normal distribution with mean 0.0 and standard_deviation of 1.0
+
+[[simulations]]
+# The `iteration` field is optional, when it's missing, the default number of iterations is used (currently 1 000 000).
+simulation_type = { probability = 0.7 } # Calculates the value of the test statistic, so that the statistic value is less than it with the probability 0.7
 [simulations.simulation.Kolmogorov_Smirnov_test]
 samples = 259
 distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
 
 [[simulations]]
-simulation_type = { probability = 0.7 }
-[simulations.simulation.Kolmogorov_Smirnov_test]
-samples = 259
-distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
+simulation_type = "make_distribution" # Calculates a list of about 101 equally distributed statistic value, first value is the minimal generated, last is the maximal
 
-[[simulations]]
-iterations = 1000
-simulation_type = "make_distribution"
-[simulations.simulation.Kolmogorov_Smirnov_test]
-samples = 259
-distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
-
-[[simulations]]
-simulation_type = "make_distribution"
+# Simulate Lilliefors test
+# At each iteration generates a list of samples from the distribution
+# The statistic value is the d_max value between the step distribution of the generated values
+# and the distribution of the given type that approximates the generated values
 [simulations.simulation.Lilliefors_test]
 samples = 259
-generating_distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
-distribution_to_compare = "Normal"
+generating_distribution = {type = "Normal", mean = 0.0, stdev = 1.0} # Generate values from a normal distribution with mean 0.0 and standard_deviation of 1.0
+distribution_to_compare = "Normal" # Compare the step distribution with the normal distribution with the same mean and standard deviation
 
+[[simulation]]
+simulation_type = "mean_and_stdev" # Calculates the mean and the standard deviation of the generated statistic values
+
+# Executes the "Snowfall" simulation
+# At each iteration generates a number of "snowfalls" from the Poisson distribution with given average
+# For each snowfall generates a random "snow" amount from the Log-normal distribution with given average and standard deviation of logarithms of snow amounts
+# The statistic is the total "snow" amount
+[simulations.simulation.Snowfall]
+average_snowfall_number = 60 # The mean of the Poisson distribution
+average_log_snow_amount = 8.3 # The mean of the logarithms for the Log-normal distribution (the "mu" parameter)
+stdev_log_snow_amount = 3.4 # The standard deviation of the logarithms for the Log-normal distribution (the "sigma" parameter)
