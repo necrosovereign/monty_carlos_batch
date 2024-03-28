@@ -24,11 +24,14 @@ use input::InputBatch;
 
 fn main() {
     let input_path = std::env::args().nth(1).unwrap();
-    let input_batch: InputBatch =
-        match toml::from_str(&std::fs::read_to_string(input_path).unwrap()) {
-            Ok(input) => input,
-            Err(err) => panic!("{}", err.message()),
-        };
+    let input = std::fs::read_to_string(input_path).unwrap();
+    let input_batch: InputBatch = match toml::from_str(&input) {
+        Ok(input) => input,
+        Err(err) => {
+            println!("{err}");
+            panic!();
+        }
+    };
     for input in input_batch.batch {
         input.run_simulation();
     }

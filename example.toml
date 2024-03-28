@@ -30,7 +30,7 @@ samples = 259
 generating_distribution = {type = "Normal", mean = 0.0, stdev = 1.0} # Generate values from a normal distribution with mean 0.0 and standard_deviation of 1.0
 distribution_to_compare = "Normal" # Compare the step distribution with the normal distribution with the same mean and standard deviation
 
-[[simulation]]
+[[simulations]]
 simulation_type = "mean_and_stdev" # Calculates the mean and the standard deviation of the generated statistic values
 
 # Executes the "Snowfall" simulation
