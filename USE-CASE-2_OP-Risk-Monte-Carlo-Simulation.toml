@@ -1,5 +1,5 @@
 [[simulations]]
-iterations = ???
+iterations = 0
 
 #Uncomment exactly one of the following options: 
 
@@ -17,6 +17,6 @@ simulation_type = "mean_and_stdev"
 
 
 [simulations.simulation.Snowfall] 
-average_snowfall_number = ???
-average_log_snow_amount = ???
-stdev_log_snow_amount = ???
+average_snowfall_number = 0
+average_log_snow_amount = 0
+stdev_log_snow_amount = 0
