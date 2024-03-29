@@ -3,7 +3,7 @@
 
 [[simulations]]
 
-iterations = #insert: integer, which will set the number of simulations to be run, or delete this line to run a million simulations (standard setting). 
+iterations = 0 #insert: integer, which will set the number of simulations to be run, or delete this line to run a million simulations (standard setting). 
 #WARNING: If you insert very huge numbers, like a billion, be aware that several GB of RAM will be blocked for the duration of the simulation. 
 
 simulation_type = { test_statistic = #insert: the D-max-value you obtained using the Kolmogorov-Smirnov-Test on your data. 
@@ -14,7 +14,7 @@ simulation_type = { test_statistic = #insert: the D-max-value you obtained using
 #Continue with this code, if you applied the Kolmogorov-Smirnov-Test to your empirical data sample: 
 
 [simulations.simulation.Kolmogorov_Smirnov_test] 
-samples = #insert: the size of you empirical data sample, that is the number of datums (e.g. values, etc.). The program will generate only data sets of the same here given size. (Only a comparison of data sets of the same size will yield reliable information.)
+samples = 0 #insert: the size of you empirical data sample, that is the number of datums (e.g. values, etc.). The program will generate only data sets of the same here given size. (Only a comparison of data sets of the same size will yield reliable information.)
 distribution = {type = "Normal" #other choices are not (yet) implemented...
 		, mean = #insert: the mean of the TestDistr.
 		, stdev = #insert: standard dev. of the TestDistr.
@@ -25,7 +25,7 @@ distribution = {type = "Normal" #other choices are not (yet) implemented...
 #Continue with this code, if you applied the Lilliefors-Test to your empirical data sample: 
 
 [simulations.simulation.Lilliefors_test] 
-samples = #insert: the size of you empirical data sample, that is the number of datums (e.g. values, etc.). The program will generate only data sets of the same here given size. (Only a comparison of data sets of the same size will yield reliable information.)
+samples = 0 #insert: the size of you empirical data sample, that is the number of datums (e.g. values, etc.). The program will generate only data sets of the same here given size. (Only a comparison of data sets of the same size will yield reliable information.)
 generating_distribution = {type = "Normal"#other choices are not (yet) implemented...
 		, mean = #insert: some mean (it could be the mean of the TestDistr, which in this case should be the same as the mean of the empirical data sample). 
 		, stdev = #insert: some standard deviation (it could be standard dev. of the TestDistr, which in this case should be the same as the mean of the empirical data sample). 
