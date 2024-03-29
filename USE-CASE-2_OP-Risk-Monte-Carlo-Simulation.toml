@@ -1,0 +1,22 @@
+[[simulations]]
+iterations = ???
+
+#Uncomment exactly one of the following options: 
+
+#Option A: 
+simulation_type = "mean_and_stdev" 
+
+#Option B: 
+#simulation_type = "make_distribution" 
+
+#Option C:
+#simulation_type = { test_statistic = ??? }
+
+#Option D:
+#simulation_type = { probability = ??? } 
+
+
+[simulations.simulation.Snowfall] 
+average_snowfall_number = ???
+average_log_snow_amount = ???
+stdev_log_snow_amount = ???
