@@ -1,0 +1,38 @@
+#USE-CASE 2)
+#For performing the Monte-Carlo-Simulation described in the README, use the following code: 
+
+#Mandatory: 
+#No matter what information you want to generate, start with this chunk of code: 
+[[simulations]]
+iterations = 0 #insert: integer, which will set the number of simulations to be run, or delete this line to run a million simulations (standard setting). 
+#WARNING: If you insert very huge numbers, like a billion, be aware that several GB of RAM will be blocked for the duration of the simulation. 
+
+
+#Option A: You will receive a list of about 101 values from the generated (loss) distribution, which were picked in this way: the first and the last point are the minimum and maximum respectively of all generated values, all other values except for the last two have equally many data points between them - so between the first and second value are n more values, between the second and third values are n other values, and so on - only the gap between the second to last and last value could be a little smaller. In other words, these values are somewhat comparable to percentiles. 
+#To achieve this, continue with the following code: 
+simulation_type = "make_distribution" 
+
+#Option B: You will be given the mean and the standard deviation of the generated set of values. 
+#To achieve this, continue with the following code: 
+simulation_type = "mean_and_stdev" 
+
+#Option C: You will be given the fraction of data points / values from the generated data set that are smaller than some value of your choice. This means, you are given the probability that your chosen value (loss amount per year) is higher, than a randomly picked value (loss amount per year) from the generated data set. 
+#To achieve this, continue with the following code: 
+simulation_type = { test_statistic = #insert: some number that may be interpreted as some loss amount per year (in some currency).
+	}
+	
+#Option D: This is essentially the inverse of option C. You give a probability/percentage p and you will get the value (loss amount) from the generated data set which is larger than p% of values from the same data set, and this is the same as getting the p-th percentile of the generated data set. If you pick p=0.95, p=0.99 or p=0.999, you can get the VaR. 
+#To achieve this, continue with the following code:
+simulation_type = { probability = #insert: a number between 0 and 1 representing a probability or percentage.
+	} 
+
+
+#Mandatory: 
+#In order to complete the code, you need to insert the required information about the Poisson- and Log-Normal-distribution using the following chunk of code: 
+[simulations.simulation.Snowfall] 
+average_snowfall_number = 0 #insert: average number of loss events, which the program will take as the mean of the Poisson-Distribution.
+average_log_snow_amount = 0 #insert: if you have an empirical data set and want to use its parameters, calculate the mean of the logarithmized data and insert it here. Equivalently, you can insert the "mu" parameter for the Log-Normal-distribution that you want to use. 
+stdev_log_snow_amount = 0 #insert: the standard deviation of the logarithmized empirical data set, if you want to use this, or insert the "sigma" parameter for the Log-normal distribution that you want to use. 
+
+#The input-code has to be a toml-file with name "[name].toml", and has to be "given to" the program using this command line in the Windows command window (cmd): 
+#[name of monty_carlos_batch-program].exe [name of input-file].toml

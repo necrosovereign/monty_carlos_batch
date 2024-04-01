@@ -1,0 +1,16 @@
+[[simulations]]
+iterations = 0
+simulation_type = { test_statistic = ??? } #The D-max-value...
+
+#Uncomment exactly one of the following options: 
+
+#Kolmogorov-Smirnov-Test: 
+#[simulations.simulation.Kolmogorov_Smirnov_test] 
+#samples = ???
+#distribution = {type = "Normal", mean = ???, stdev = ???}
+
+#Lilliefors-Test: 
+[simulations.simulation.Lilliefors_test] 
+samples = 0
+generating_distribution = {type = "Normal", mean = ???, stdev = ???} 
+distribution_to_compare = "Normal" 

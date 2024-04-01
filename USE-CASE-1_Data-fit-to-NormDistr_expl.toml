@@ -1,0 +1,38 @@
+#USE-CASE 1) 
+#Use the following code as input for the monty_carlos_batch_0.1.0-x86_64-pc-windows-gnu.exe if you want to calculate P: 
+
+[[simulations]]
+
+iterations = 0 #insert: integer, which will set the number of simulations to be run, or delete this line to run a million simulations (standard setting). 
+#WARNING: If you insert very huge numbers, like a billion, be aware that several GB of RAM will be blocked for the duration of the simulation. 
+
+simulation_type = { test_statistic = #insert: the D-max-value you obtained using the Kolmogorov-Smirnov-Test on your data. 
+	}
+
+
+#Option Kolmogorov-Smirnov-Test: 
+#Continue with this code, if you applied the Kolmogorov-Smirnov-Test to your empirical data sample: 
+
+[simulations.simulation.Kolmogorov_Smirnov_test] 
+samples = 0 #insert: the size of you empirical data sample, that is the number of datums (e.g. values, etc.). The program will generate only data sets of the same here given size. (Only a comparison of data sets of the same size will yield reliable information.)
+distribution = {type = "Normal" #other choices are not (yet) implemented...
+		, mean = #insert: the mean of the TestDistr.
+		, stdev = #insert: standard dev. of the TestDistr.
+	}
+
+
+#Option Lilliefors-Test: 
+#Continue with this code, if you applied the Lilliefors-Test to your empirical data sample: 
+
+[simulations.simulation.Lilliefors_test] 
+samples = 0 #insert: the size of you empirical data sample, that is the number of datums (e.g. values, etc.). The program will generate only data sets of the same here given size. (Only a comparison of data sets of the same size will yield reliable information.)
+generating_distribution = {type = "Normal"#other choices are not (yet) implemented...
+		, mean = #insert: some mean (it could be the mean of the TestDistr, which in this case should be the same as the mean of the empirical data sample). 
+		, stdev = #insert: some standard deviation (it could be standard dev. of the TestDistr, which in this case should be the same as the mean of the empirical data sample). 
+	} #The "generating distribution" will be used to generate samples of data. 
+distribution_to_compare = "Normal" #This command makes the program fit to each generated data sample a normal distribution (i.e. mean and standard dev. of the normal distr. will be identical to the data set's mean & st. dev.) and uses this fitted normal distribution to calculate the D-max-value of this data sample. 
+#There is no other option than "Normal" right now... 
+
+
+#The input-code has to be a toml-file with name "[name].toml", and has to be "given to" the program using this command line in the Windows command window (cmd): 
+#[name of monty_carlos_batch-program].exe [name of input-file].toml
