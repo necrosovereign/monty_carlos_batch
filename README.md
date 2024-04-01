@@ -42,7 +42,7 @@ You have derived some mean for the Poisson-distribution and a mu and sigma for t
 
 ## How to compose input files
 
-Instructions on how to compose the `.toml`-files can be found in the attached `.toml`-files:
+Instructions on how to compose the `.toml`-files can be found in the `.toml`-files in the `input_examples` directory:
 - "Data_fit_to_NormDistr_expl.toml" explains how to fill the .toml-file for above described use case 1).
 - "Data_fit_to_NormDistr.toml" has only the relevant code, no explanations.
 - "OP-Risk_Monte-Carlo_Simulation_expl.toml" explains how to fill the .toml-file for use case 2).
