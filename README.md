@@ -1,8 +1,17 @@
 # Monty-Carlos_batch
 
-This program is based on the [Monty-Carlos](https://github.com/necrosovereign/monty_carlos) library and can help you in the following two scenarios:
+This program is based on the [Monty-Carlos](https://github.com/necrosovereign/monty_carlos) library and can help you in the scenarios described in the section `Use Cases`:
 
-## 1) Performing Kolmogorov-Smirnov-Test OR Lilliefors-Test without the need for tables: 
+## Usage
+In a terminal (On Windows run `cmd` of `PowerShell`) write the following command:
+```
+[name of monty-carlos-batch-executable] [name of input file].toml
+```
+
+The `TOML` file is created by the user to describe which simulation they want to run (See section `How to compose input files`).
+
+## Use Cases
+### 1) Performing Kolmogorov-Smirnov-Test OR Lilliefors-Test without the need for tables: 
 
 Premise: You have a dataset (containing real numbers) and you have calculated the maximum vertical distance (D-max-value) between your empirical cumulative distribution function (empDistr) of this dataset and an artificially generated cumulative NORMAL distribution function (TestDistr) 
 using either Kolmogorov-Smirnov-Test, where mean & standard deviation of the TestDistr are chosen on theoretical grounds, 
@@ -17,7 +26,7 @@ Example: P=1/3 means "a third of all generated data samples had a smaller D-max-
 This value P can be interpreted as the probability that a data set that is artificially created from the TestDistr has a lower distance from the TestDistr than the empirical data set. This means: the higher this probability, the worse the fit of the empirical data to the TestDistr. 
 (One minus this probability is usually denoted as "alpha" in papers about the Kolmogorov-Smirnov-Test or the Lilliefors-Test.) 
 
-## 2) Monte-Carlo-Simulation for OP-Risk model where Poisson-Distr. models loss frequency and Log-Normal-Distr models loss amount: 
+### 2) Monte-Carlo-Simulation for OP-Risk model where Poisson-Distr. models loss frequency and Log-Normal-Distr models loss amount: 
 
 Premise: You have read Hull (2018) "Risk Management and Financial Institutions" and want to test the model for estimating operational risk from the textbook, chapter 23.3.1. 
 >Brief summary: We model the frequency of loss events per year as random variable using Poisson-distribution and the loss amount per loss event as a second independent random variable using Log-Normal-distribution. Using Monte-Carlo-Simulation it is possible to generate lots of random loss amounts per year. From this data, a distribution of loss per year can be derived and with it some other information, such as VaR. 
@@ -31,17 +40,13 @@ You have derived some mean for the Poisson-distribution and a mu and sigma for t
 3. Option C: You will be given the fraction of data points / values from the generated data set that are smaller than some value of your choice. This means, you are given the probability that your chosen value is higher, than a randomly picked value from the generated data set.
 4. Option D: This is essentially the inverse of option C. You give a probability/percentage p and you will get the smallest value (loss amount per year) from the generated data set which is larger than p% of values from the same data set. This is essentially the same as getting the p-th percentile of the generated data set. If you pick p=0.95, p=0.99 or p=0.999, you can get the VaR. 
 
-## Usage of program: see explanations in the .toml-files pertaining to the two use-cases.
+## How to compose input files
 
-Before running the program currently named `monty_carlos_batch_0.1.0-x86_64-pc-windows-gnu.exe`, an input file of type .toml has to be created which will be called together with the program itself. 
-
-Instructions on how to create the .toml-files can be found in the attached .toml-files: 
+Instructions on how to compose the `.toml`-files can be found in the attached `.toml`-files:
 - "Data_fit_to_NormDistr_expl.toml" explains how to fill the .toml-file for above described use case 1).
 - "Data_fit_to_NormDistr.toml" has only the relevant code, no explanations.
 - "OP-Risk_Monte-Carlo_Simulation_expl.toml" explains how to fill the .toml-file for use case 2).
 - "OP-Risk_Monte-Carlo_Simulation.toml" contains just the relevant code, no explanations. 
 
-In Windows, the program has to be run via cmd.exe by inserting the following command line: 
-```
-[name of monty-carlos-batch-executable].exe [name of input file].toml
-```
+See `example.toml` for the concise explanation.
+
