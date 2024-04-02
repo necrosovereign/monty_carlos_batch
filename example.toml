@@ -1,7 +1,10 @@
 # Each [[simulations]] starts a new command to run a simulation
 [[simulations]]
 iterations = 1000 # How many iterations of simulation will run
-simulation_type = { test_statistic = 0.45 } # Calculates how probable for the statistic value to be less than 0.45
+queries = [
+    { test_statistic = 0.45 }, # Calculates how probable for the statistic value to be less than 0.45
+    { probability = 0.7} # Calculates the value of the test statistic, so that the statistic value is less than it with the probability 0.7
+    ]
 
 # Simulate Kolmogorov-Smirnov test.
 # At each iteration generates a list of samples from the distribution
@@ -11,15 +14,10 @@ simulation_type = { test_statistic = 0.45 } # Calculates how probable for the st
 samples = 259 # number of values in the generated list
 distribution = {type = "Normal", mean = 0.0, stdev = 1.0} # Generate values from a normal distribution with mean 0.0 and standard_deviation of 1.0
 
-[[simulations]]
-# The `iteration` field is optional, when it's missing, the default number of iterations is used (currently 1 000 000).
-simulation_type = { probability = 0.7 } # Calculates the value of the test statistic, so that the statistic value is less than it with the probability 0.7
-[simulations.simulation.Kolmogorov_Smirnov_test]
-samples = 259
-distribution = {type = "Normal", mean = 0.0, stdev = 1.0}
 
 [[simulations]]
-simulation_type = "make_distribution" # Calculates a list of about 101 equally distributed statistic value, first value is the minimal generated, last is the maximal
+# The `iteration` field is optional, when it's missing, the default number of iterations is used (currently 1 000 000).
+queries = ["make_distribution"] # Calculates a list of about 101 equally distributed statistic value, first value is the minimal generated, last is the maximal
 
 # Simulate Lilliefors test
 # At each iteration generates a list of samples from the distribution
@@ -31,7 +29,7 @@ generating_distribution = {type = "Normal", mean = 0.0, stdev = 1.0} # Generate 
 distribution_to_compare = "Normal" # Compare the step distribution with the normal distribution with the same mean and standard deviation
 
 [[simulations]]
-simulation_type = "mean_and_stdev" # Calculates the mean and the standard deviation of the generated statistic values
+queries = ["mean_and_stdev"] # Calculates the mean and the standard deviation of the generated statistic values
 
 # Executes the "Snowfall" simulation
 # At each iteration generates a number of "snowfalls" from the Poisson distribution with given average
