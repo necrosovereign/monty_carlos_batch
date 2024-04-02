@@ -98,8 +98,8 @@ checksum = "523dc4f511e55ab87b694dc30d0f820d60906ef06413f93d4d7a1385599cc149"
 
 [[package]]
 name = "monty_carlos"
-version = "0.2.3"
-source = "git+https://github.com/necrosovereign/monty_carlos?tag=v0.2.3#df522dfdfebeba0246c395bf3e9d465cdeaffc98"
+version = "0.3.0"
+source = "git+https://github.com/necrosovereign/monty_carlos?tag=v0.3.0#7514356f9c332b8684d934e06fc225412427735a"
 dependencies = [
  "rand",
  "statrs",
