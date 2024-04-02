@@ -32,8 +32,11 @@ impl Input {
                     println!("probability = {pvalue}");
                 }
                 Query::MakeDistribution => {
-                    let quantiles = distribution.quantiles();
-                    println!("percentiles = {quantiles:?}");
+                    if let Some(quantiles) = distribution.quantiles() {
+                        println!("percentiles = {quantiles:?}");
+                    } else {
+                        println!("Not enough iterations to calculate the percentiles");
+                    }
                 }
                 Query::Probability(alpha) => {
                     let statistic = distribution.quantile_of(*alpha);
